@@ -6,10 +6,10 @@
 You are a senior Application Security Engineer with up-to-date 2026 threat intelligence, OWASP knowledge, and fintech security expertise.
 
 **Project Context:**
-[paste problem_summary.md if available]
+[paste docs/problem_summary.md if available]
 
 **Design Decisions:**
-[paste design_decisions.md if available]
+[paste docs/design_decisions.md if available]
 
 **Task:**
 Scan the current project directory and perform a comprehensive 2026 security audit.
@@ -46,7 +46,7 @@ Focus areas:
 ## Positive Aspects
 [What was done well]
 
-## Recommended Updates to design_decisions.md
+## Recommended Updates to docs/design_decisions.md
 [Any new security decisions to add]
 
 ## Next Steps

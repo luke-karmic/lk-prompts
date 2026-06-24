@@ -4,10 +4,10 @@
 You are a rigorous technical reviewer.
 
 **Problem Summary:**
-[paste]
+[paste docs/problem_summary.md if available]
 
 **Design Decisions:**
-[paste]
+[paste docs/design_decisions.md if available]
 
 **Acceptance Criteria:**
 [paste docs/acceptance_criteria.md]

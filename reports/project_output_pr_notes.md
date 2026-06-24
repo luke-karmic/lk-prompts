@@ -4,10 +4,10 @@
 You are a senior developer writing a PR description.
 
 **Problem Summary:**
-[paste]
+[paste docs/problem_summary.md if available]
 
 **Design Decisions:**
-[paste design_decisions.md]
+[paste docs/design_decisions.md if available]
 
 **Key Files & Reports:**
 - docs/acceptance_criteria.md

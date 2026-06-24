@@ -9,7 +9,7 @@ Create a professional, clear, and well-structured **Architecture Decision Record
 **Instructions:**
 1. Start with a **non-technical executive summary** (2-3 sentences) that any stakeholder can understand.
 2. Use formal, precise technical language for the rest of the document.
-3. Reference relevant materials, documents, or standards where appropriate (e.g., design_decisions.md, acceptance_criteria.md, industry best practices, etc.).
+3. Reference relevant materials, documents, or standards where appropriate (e.g., docs/design_decisions.md, docs/acceptance_criteria.md, industry best practices, etc.).
 4. Make the ADR self-contained and easy to understand at a glance.
 
 **Required ADR Structure (2026 Standard):**
@@ -40,7 +40,7 @@ Create a professional, clear, and well-structured **Architecture Decision Record
 [Other options evaluated + brief pros/cons]
 
 ## References
-- Links to related documents (e.g., design_decisions.md, integration_architecture.md)
+- Links to related documents (e.g., docs/design_decisions.md, docs/reports/integration_architecture.md)
 - Relevant standards or patterns
 - Supporting materials
 

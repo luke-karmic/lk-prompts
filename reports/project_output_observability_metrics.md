@@ -5,10 +5,10 @@
 You are a senior observability engineer.
 
 **Problem Summary:**
-[paste problem_summary.md]
+[paste docs/problem_summary.md]
 
 **Design Decisions:**
-[paste design_decisions.md]
+[paste docs/design_decisions.md]
 
 **Task:**
 Analyze the current project and generate a prioritized metrics report based on the business logic.

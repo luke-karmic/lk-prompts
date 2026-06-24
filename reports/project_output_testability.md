@@ -6,10 +6,10 @@
 You are a senior test engineer focused on testability and verification.
 
 **Project Context:**
-[paste problem_summary.md if available]
+[paste docs/problem_summary.md if available]
 
 **Design Decisions:**
-[paste design_decisions.md if available]
+[paste docs/design_decisions.md if available]
 
 **Task:**
 Scan the current project directory and evaluate how testable the codebase is.

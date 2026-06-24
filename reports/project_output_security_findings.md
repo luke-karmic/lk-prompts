@@ -1,10 +1,10 @@
 You are a senior Application Security Engineer with current 2026 threat intelligence.
 
 **Project Context:**
-[paste problem_summary.md]
+[paste docs/problem_summary.md]
 
 **Design Decisions:**
-[paste design_decisions.md]
+[paste docs/design_decisions.md]
 
 **Codebase:**
 [If the LLM can see the full project, say "Analyze the entire current codebase". Otherwise paste the main files here.]
@@ -51,7 +51,7 @@ Focus areas:
 ## Positive Aspects
 [What was implemented well from a security standpoint]
 
-## Recommended Updates to design_decisions.md
+## Recommended Updates to docs/design_decisions.md
 [Any new security-related decisions to add]
 
 ## Next Steps

@@ -2,6 +2,8 @@
 
 A human-led, AI-assisted workflow for technical interviews and production-grade problem solving. You stay in the driver's seat — AI accelerates framing, analysis, and implementation while you own every decision.
 
+**New here?** Read [HOW_TO_USE.md](HOW_TO_USE.md) for the step-by-step workflow. **Example walkthrough:** [examples/walkthrough_ig_corpus.md](examples/walkthrough_ig_corpus.md)
+
 ---
 
 ## What This Is
@@ -30,13 +32,19 @@ Open this repo (or copy the prompts into your interview project) alongside Curso
 
 ```
 your-project/
+├── .cursor/
+│   └── rules/
+│       └── lk-engineering.mdc  # from ide/fintech_project_cursor_rules.md (via scaffold)
 ├── docs/
-│   ├── problem_summary.md      # Phase 1 — you write or expand with AI
-│   ├── design_decisions.md     # Phases 1–2 — living decision log
+│   ├── problem_summary.md      # Step 1 — WHAT & WHY (stable IDs)
+│   ├── solution_options.md     # Step 2 — OPTIONS (fit matrix, risks)
+│   ├── design_decisions.md     # Step 2.5 — CHOSEN (coverage map)
+│   ├── acceptance_criteria.md  # Phase 6 — AC-* traces to FR-*/NFR-*
 │   └── reports/                # Phase 3+ — auto-saved review outputs
 │       ├── security_2026_report.md
 │       ├── code_quality_report.md
-│       └── testability_report.md
+│       ├── testability_report.md
+│       └── integration_architecture.md
 └── src/                        # Phase 4 — implementation
 ```
 
@@ -63,32 +71,43 @@ Create `docs/reports/` and ensure your AI tool can read and write the project di
 
 ### Phase 1: Human Framing (3–6 min)
 
-**Goal:** Establish context and priorities before any architecture or code.
+**Goal:** Establish WHAT & WHY before any architecture or code.
 
-1. Write `docs/problem_summary.md` yourself, or use the **Problem Statement Expander** prompt from [`toolkit/1_engineering_toolkit.md`](toolkit/1_engineering_toolkit.md).
+1. Write `docs/problem_summary.md` yourself, or use the **Problem Statement Expander** from [`project_toolkit/1_design_output_problem_summary.md`](project_toolkit/1_design_output_problem_summary.md).
 
-   Include:
-   - Problem summary (3–5 sentences)
-   - **Optimization priorities** (ranked — this drives every later decision)
-   - Functional and non-functional requirements
-   - Assumptions, edge cases, out of scope
+   Output includes stable IDs (`PRI-*`, `SC-*`, `FR-*`, `NFR-*`, `CON-*`, `OOS-*`, `ASM-*`, `Q-*`):
+   - Problem statement + success criteria
+   - **Optimization priorities** (ranked — drives every later trade-off)
+   - Functional, non-functional, constraints, out of scope, assumptions
+   - Open questions + considerations coverage table
 
-2. Run the **Design Decisions Bootstrap** prompt from [`toolkit/2_design_decisions_refinement.md`](toolkit/2_design_decisions_refinement.md) to generate `docs/design_decisions.md` with a **Decisions To Be Made** list.
+   Answer any **Questions for Human** before proceeding. No solution content in this file.
 
-   Do not finalize decisions yet. Review the AI's initial recommendations and mark anything you disagree with.
+2. Run **Solution Options** from [`project_toolkit/2_design_output_solution_options.md`](project_toolkit/2_design_output_solution_options.md).
+
+   Generates `docs/solution_options.md`: Requirements Fit Matrix (every SC/FR/NFR × each approach), risks, trade-offs, future concerns. **Status: Exploring** — you choose.
+
+3. Run **Solution Coverage Map** from [`project_toolkit/2.5_design_output_solution_coverage.md`](project_toolkit/2.5_design_output_solution_coverage.md) after choosing.
+
+   Generates `docs/design_decisions.md`: What We're Building + Coverage Map + Refinement Tasks.
+
+   **Formal mode (optional):** [`2_design_output_decisions_draft.md`](project_toolkit/2_design_output_decisions_draft.md) for bulk interview draft.
 
 ---
 
 ### Phase 2: Iterative Human Decisions (5–10 min)
 
-**Goal:** Lock in decisions one topic at a time with explicit rationale.
+**Goal:** Lock in HOW with explicit rationale and requirement traceability.
 
-Use the **Decision Refiner** prompt from [`toolkit/3_decision_refiner.md`](toolkit/3_decision_refiner.md) for each topic:
+Use **Decision Refiner** from [`project_toolkit/3_design_refine_single_decision.md`](project_toolkit/3_design_refine_single_decision.md). **Start with Core Architecture / Approach.**
 
-1. Set `Decision Topic to Refine` (e.g. "Data Integrity & Validation Strategy")
-2. Review the AI's options and recommendation
-3. **You** make the final call — edit if needed
-4. Confirm `Status: Human Reviewed` before moving on
+1. Review the **Approach Fit Analysis** table — each concern rated Strong/Weak/Required/etc. per option
+2. Confirm the summary cites `PRI-*` as tie-breaker
+3. Set `Decision Topic to Refine` (e.g. "Core Architecture / Approach")
+4. **You** make the final call — edit if needed
+5. Confirm `Status: Human Reviewed` → updates Solution Overview + Traceability Matrix
+
+Each recorded decision cites `Addresses: FR-*`, `Aligned priorities: PRI-*`, and links to Fit Analysis.
 
 Repeat for each item in **Decisions To Be Made**. Typical topics:
 
@@ -111,18 +130,19 @@ With finalized (or mostly finalized) decisions:
 
 | Prompt | File | Output |
 |--------|------|--------|
-| Architecture & Diagram | [`toolkit/4_diagramming.md`](toolkit/4_diagramming.md) | Mermaid flowchart + approach evaluation |
-| Gap Analysis | [`toolkit/5_gap_analysis.md`](toolkit/5_gap_analysis.md) | Prioritized gaps in design |
-| 2026 Security Review | [`reports/security_main_considerations.md`](reports/security_main_considerations.md) | → `docs/reports/security_2026_report.md` |
+| Architecture & Diagram | [`project_toolkit/4_design_output_architecture_diagram.md`](project_toolkit/4_design_output_architecture_diagram.md) | Mermaid flowchart + approach evaluation |
+| Gap Analysis | [`project_toolkit/5_design_output_gap_analysis.md`](project_toolkit/5_design_output_gap_analysis.md) | Prioritized gaps in design |
+| 2026 Security Review | [`reports/project_output_security_audit.md`](reports/project_output_security_audit.md) | → `docs/reports/security_2026_report.md` |
 
 Run additional reviews as time allows:
 
 | Prompt | File | Output |
 |--------|------|--------|
-| Code Quality | [`reports/code_quality.md`](reports/code_quality.md) | → `docs/reports/code_quality_report.md` |
-| Testability | [`reports/testability.md`](reports/testability.md) | → `docs/reports/testability_report.md` |
-| Performance & Scalability | Available on request | → `docs/reports/` |
-| Reliability & Data Integrity | Available on request | → `docs/reports/` |
+| Code Quality | [`reports/project_output_code_quality.md`](reports/project_output_code_quality.md) | → `docs/reports/code_quality_report.md` |
+| Testability | [`reports/project_output_testability.md`](reports/project_output_testability.md) | → `docs/reports/testability_report.md` |
+| Performance & Optimal Metrics | [`reports/project_output_optimal_metrics.md`](reports/project_output_optimal_metrics.md) | → `docs/reports/performance_metrics_report.md` |
+| Observability Metrics | [`reports/project_output_observability_metrics.md`](reports/project_output_observability_metrics.md) | → `docs/reports/metrics_recommendations.md` |
+| Testing Pyramid | [`reports/project_output_testing_pyramid.md`](reports/project_output_testing_pyramid.md) | → `docs/reports/testing_pyramid_analysis.md` |
 
 **Before running review prompts:** Set the configuration block at the top of each prompt (language, project type, domain). Paste or reference `docs/problem_summary.md` and `docs/design_decisions.md` for context.
 
@@ -131,7 +151,7 @@ All review reports follow the same structure:
 - Executive summary with overall risk/quality level
 - Findings: **Critical → High → Medium → Low**
 - Positive aspects
-- Recommended updates to `design_decisions.md`
+- Recommended updates to `docs/design_decisions.md`
 - Next steps
 
 ---
@@ -142,14 +162,15 @@ All review reports follow the same structure:
 
 1. Generate code in **small chunks** (one module or feature at a time)
 2. Reference `docs/design_decisions.md` in each implementation prompt
-3. For TypeScript projects, optionally start with [`high_code_quality_ts_project_scaffold.md`](high_code_quality_ts_project_scaffold.md) for a strict, production-grade baseline
+3. For TypeScript projects, optionally start with [`scaffolding/project_generate_typescript_scaffold.md`](scaffolding/project_generate_typescript_scaffold.md) for a strict, production-grade baseline (includes `docs/` layout and `.cursor/rules/lk-engineering.mdc` from [`ide/fintech_project_cursor_rules.md`](ide/fintech_project_cursor_rules.md))
 4. **Review manually** after each chunk — do not accept large diffs blindly
 
 Prompt pattern:
 
 ```markdown
 Implement [specific module] according to docs/design_decisions.md.
-Respect optimization priorities in docs/problem_summary.md.
+Every change must trace to FR-* / NFR-* cited in the relevant decision.
+Respect PRI-* ordering from docs/problem_summary.md.
 Do not introduce patterns we explicitly rejected in design decisions.
 ```
 
@@ -170,18 +191,73 @@ Do not introduce patterns we explicitly rejected in design decisions.
 
 ## Prompt Reference
 
-| Purpose | Location |
-|---------|----------|
-| Problem statement expander | [`toolkit/1_engineering_toolkit.md`](toolkit/1_engineering_toolkit.md) |
-| Design decisions bootstrap | [`toolkit/2_design_decisions_refinement.md`](toolkit/2_design_decisions_refinement.md) |
-| Iterative decision refiner | [`toolkit/3_decision_refiner.md`](toolkit/3_decision_refiner.md) |
-| Architecture & Mermaid diagram | [`toolkit/4_diagramming.md`](toolkit/4_diagramming.md) |
-| Gap analysis | [`toolkit/5_gap_analysis.md`](toolkit/5_gap_analysis.md) |
-| 2026 security review (auto-save) | [`reports/security_main_considerations.md`](reports/security_main_considerations.md) |
-| Code quality review (auto-save) | [`reports/code_quality.md`](reports/code_quality.md) |
-| Testability review (auto-save) | [`reports/testability.md`](reports/testability.md) |
-| Full codebase security audit | [`security/top_flaws_project_check_report.md`](security/top_flaws_project_check_report.md) |
-| TypeScript project scaffold | [`high_code_quality_ts_project_scaffold.md`](high_code_quality_ts_project_scaffold.md) |
+Prompt files follow `{scope}_{action}_{deliverable}.md`. The ordered workflow uses a `{n}_` prefix (`1_`–`5_`).
+
+### Workflow (ordered)
+
+| Step | Purpose | File | Output |
+|------|---------|------|--------|
+| 1 | Problem statement expander | [`project_toolkit/1_design_output_problem_summary.md`](project_toolkit/1_design_output_problem_summary.md) | `docs/problem_summary.md` |
+| 2 | **Solution options** | [`project_toolkit/2_design_output_solution_options.md`](project_toolkit/2_design_output_solution_options.md) | `docs/solution_options.md` |
+| 2.5 | Solution coverage map | [`project_toolkit/2.5_design_output_solution_coverage.md`](project_toolkit/2.5_design_output_solution_coverage.md) | `docs/design_decisions.md` |
+| 2b | Decisions bootstrap (formal only) | [`project_toolkit/2_design_output_decisions_draft.md`](project_toolkit/2_design_output_decisions_draft.md) | bulk `design_decisions.md` draft |
+| 3 | Iterative decision refiner (formal) | [`project_toolkit/3_design_refine_single_decision.md`](project_toolkit/3_design_refine_single_decision.md) | updates `docs/design_decisions.md` |
+| 4 | Architecture & Mermaid diagram | [`project_toolkit/4_design_output_architecture_diagram.md`](project_toolkit/4_design_output_architecture_diagram.md) | Mermaid + evaluation |
+| 5 | Gap analysis | [`project_toolkit/5_design_output_gap_analysis.md`](project_toolkit/5_design_output_gap_analysis.md) | prioritized design gaps |
+| 6 | Acceptance criteria | [`project_toolkit/6_acceptance_criteria_simple.md`](project_toolkit/6_acceptance_criteria_simple.md) | `docs/acceptance_criteria.md` |
+
+### Traceability
+
+Requirement IDs live in `docs/problem_summary.md`. The **Requirement Traceability Matrix** and **Approach Fit Analysis** live only in `docs/design_decisions.md`.
+
+| ID prefix | Document | Purpose |
+|-----------|----------|---------|
+| `PRI-*`, `FR-*`, `NFR-*`, `SC-*`, … | problem_summary | WHAT — frozen after Step 1 |
+| Fit + Confidence per option | **solution_options** | OPTIONS — before choosing |
+| Coverage Map | design_decisions | CHOSEN — confidence after Step 2.5 |
+| `AC-*` | acceptance_criteria | Verification → `FR-*` / `NFR-*` |
+
+See [HOW_TO_USE.md](HOW_TO_USE.md) and [examples/walkthrough_ig_corpus.md](examples/walkthrough_ig_corpus.md).
+
+### Project output (reviews → `docs/reports/`)
+
+| Purpose | File | Output |
+|---------|------|--------|
+| Security audit (2026) | [`reports/project_output_security_audit.md`](reports/project_output_security_audit.md) | `docs/reports/security_2026_report.md` |
+| Security findings (codebase) | [`reports/project_output_security_findings.md`](reports/project_output_security_findings.md) | inline report |
+| Code quality | [`reports/project_output_code_quality.md`](reports/project_output_code_quality.md) | `docs/reports/code_quality_report.md` |
+| Testability | [`reports/project_output_testability.md`](reports/project_output_testability.md) | `docs/reports/testability_report.md` |
+| Testing pyramid | [`reports/project_output_testing_pyramid.md`](reports/project_output_testing_pyramid.md) | `docs/reports/testing_pyramid_analysis.md` |
+| Performance & optimal metrics | [`reports/project_output_optimal_metrics.md`](reports/project_output_optimal_metrics.md) | `docs/reports/performance_metrics_report.md` |
+| Observability metrics | [`reports/project_output_observability_metrics.md`](reports/project_output_observability_metrics.md) | `docs/reports/metrics_recommendations.md` |
+| Acceptance verification | [`reports/project_output_acceptance_verification.md`](reports/project_output_acceptance_verification.md) | `docs/reports/acceptance_criteria_verification.md` |
+| Integration architecture | [`reports/project_output_integration_architecture.md`](reports/project_output_integration_architecture.md) | `docs/reports/integration_architecture.md` |
+| PR description | [`reports/project_output_pr_notes.md`](reports/project_output_pr_notes.md) | `docs/pr_notes.md` |
+
+### Design output / refine
+
+| Purpose | File | Output |
+|---------|------|--------|
+| Data structures (interactive) | [`architecture/design_output_data_structures.md`](architecture/design_output_data_structures.md) | `docs/reports/data_structures.md` |
+| Project architecture (interactive) | [`architecture/design_refine_project_architecture.md`](architecture/design_refine_project_architecture.md) | ADR → `docs/design_decisions.md` |
+| ADR from decision | [`architecture/design_output_adr.md`](architecture/design_output_adr.md) | ADR document |
+
+### Project generate (code / config)
+
+| Purpose | File | Output |
+|---------|------|--------|
+| TypeScript project scaffold | [`scaffolding/project_generate_typescript_scaffold.md`](scaffolding/project_generate_typescript_scaffold.md) | full TS project + cursor rules |
+| Scaffold from docs | [`scaffolding/project_generate_scaffold_from_docs.md`](scaffolding/project_generate_scaffold_from_docs.md) | project files + README |
+| Docker database setup | [`project_toolkit/project_generate_docker_database.md`](project_toolkit/project_generate_docker_database.md) | `docker-compose.yml`, scripts |
+| TypeScript domain types | [`project_toolkit/project_generate_typescript_types.md`](project_toolkit/project_generate_typescript_types.md) | `src/types.ts` |
+
+### IDE rules & practice
+
+| Purpose | File | Notes |
+|---------|------|-------|
+| Cursor / AI behavior rules | [`ide/fintech_project_cursor_rules.md`](ide/fintech_project_cursor_rules.md) | → `.cursor/rules/lk-engineering.mdc` |
+| Table summary style rule | [`ide/table_summary_concise_rule.md`](ide/table_summary_concise_rule.md) | optional cursor rule |
+| Requirement elicitation sim | [`client_related/interview_simulate_requirement_elicitation.md`](client_related/interview_simulate_requirement_elicitation.md) | 5-min interview practice |
 
 ---
 
@@ -193,7 +269,7 @@ AI proposes; you dispose. The workflow breaks down when you skip Phase 2 or acce
 
 ### Priorities are the anchor
 
-Optimization priorities in `problem_summary.md` resolve ambiguity. When the AI recommends something that conflicts with your priorities, override it and note why in the rationale.
+Optimization priorities in `docs/problem_summary.md` resolve ambiguity. When the AI recommends something that conflicts with your priorities, override it and note why in the rationale.
 
 ### One thing at a time
 
@@ -219,9 +295,11 @@ If implementation diverges from design decisions, re-run the relevant review pro
 
 ```
 [ ] mkdir -p docs/reports
-[ ] docs/problem_summary.md — priorities ranked
-[ ] docs/design_decisions.md — Decisions To Be Made listed
-[ ] Each decision: Human Reviewed with rationale
+[ ] docs/problem_summary.md — IDs assigned, open questions answered
+[ ] docs/solution_options.md — Fit Matrix, Status still Exploring until you choose
+[ ] docs/design_decisions.md — Coverage Map after Step 2.5
+[ ] Core Architecture: Human Reviewed + Solution Overview written
+[ ] Each decision: cites FR-*/PRI-*, Status Human Reviewed
 [ ] Mermaid architecture diagram generated
 [ ] Security review → docs/reports/security_2026_report.md
 [ ] Code quality + testability reviews (if time)

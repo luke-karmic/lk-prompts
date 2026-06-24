@@ -5,10 +5,10 @@
 You are a senior systems architect with strong experience in distributed systems and event-driven architectures.
 
 **Problem Summary:**
-[paste problem_summary.md]
+[paste docs/problem_summary.md if available]
 
 **Current Design Decisions:**
-[paste design_decisions.md]
+[paste docs/design_decisions.md if available]
 
 **Task:**
 Analyze this problem with a focus on **integration, cross-app dependencies, and production architecture**.
@@ -43,7 +43,7 @@ Specifically consider:
 - Data consistency strategy:
 - Observability recommendations:
 
-## Recommended Additions to design_decisions.md
+## Recommended Additions to docs/design_decisions.md
 [List clear, actionable suggestions]
 
-Save this analysis to: `docs/integration_architecture.md`
+Save this analysis to: `docs/reports/integration_architecture.md`
