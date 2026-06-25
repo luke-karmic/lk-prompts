@@ -1,9 +1,9 @@
-# 2 — Design Output: Solution Options
+# COMPARE — Solution Options
 
-Ordered workflow step 2. Prompt file: `2_design_output_solution_options.md`
+Phase 02 · verb: compare · artifact: solution_options · Prompt: `02_compare_solution_options.md`
 
-Run **after** Step 1 (`docs/problem_summary.md`).
-Run **before** you choose an approach. Run **before** Step 2.5.
+Run **after** FRAME (`docs/problem_summary.md`).
+Run **before** you choose an approach. Run **before** COMMIT.
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) and [examples/walkthrough_ig_corpus.md](../examples/walkthrough_ig_corpus.md).
 
@@ -127,7 +127,7 @@ List `Q-*` from problem_summary that materially affect the comparison, plus any 
 
 1. **Every SC/FR/NFR gets a row** — this matrix is the core deliverable.
 2. **Honest confidence** — Low confidence cells are valuable; do not inflate.
-3. **No final choice** — Status stays Exploring until human picks and runs Step 2.5.
+3. **No final choice** — Status stays Exploring until human picks and runs COMMIT (`03_commit_solution_coverage.md`).
 4. **Cite IDs** — do not restate full requirement prose.
 5. **Tag inferences** `[INFERRED]` when assuming facts not in problem_summary.
 6. **No code** — names of tools/formats allowed (markdown, CLI, etc.) as approach labels only.
@@ -136,5 +136,5 @@ List `Q-*` from problem_summary that materially affect the comparison, plus any 
 
 **Footer:**
 
-> Solution options for comparison only. Run Step 2.5 after human chooses an approach.
+> Solution options for comparison only. Run COMMIT after human chooses an approach.
 > Requirement IDs from docs/problem_summary.md.

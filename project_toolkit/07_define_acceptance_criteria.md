@@ -1,11 +1,10 @@
-# 6 — Design Output: Acceptance Criteria
+# DEFINE — Acceptance Criteria
 
-Ordered workflow step 6 (post-solution shape). Prompt file: `6_acceptance_criteria_simple.md`
+Phase 07 · verb: define · artifact: acceptance_criteria · Prompt: `07_define_acceptance_criteria.md`
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) for the full workflow guide.
 
-Run this **after** Core Architecture and key design decisions are Human Reviewed — once you
-know enough about the solution to write testable criteria.
+Run **after COMMIT** (and optional SHARPEN) — once you know enough about the solution to write testable criteria. Can run before or after BUILD; VERIFY always runs after BUILD.
 
 ---
 

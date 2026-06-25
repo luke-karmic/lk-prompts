@@ -1,6 +1,6 @@
-# 5 — Design Output: Gap Analysis
+# ANALYZE — Gap Analysis
 
-Ordered workflow step 5. Prompt file: `5_design_output_gap_analysis.md`
+Phase 06 · verb: analyze · artifact: gaps · Prompt: `06_analyze_gaps.md`
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) for the full workflow guide.
 

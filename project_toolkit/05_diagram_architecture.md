@@ -1,6 +1,6 @@
-# 4 — Design Output: Architecture Diagram
+# DIAGRAM — Architecture
 
-Ordered workflow step 4. Prompt file: `4_design_output_architecture_diagram.md`
+Phase 05 · verb: diagram · artifact: architecture · Prompt: `05_diagram_architecture.md`
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) for the full workflow guide.
 

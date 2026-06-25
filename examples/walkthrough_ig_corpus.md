@@ -1,29 +1,29 @@
 # Walkthrough Example — IG Chat Export → LLM Corpus
 
-End-to-end **Steps 0–3** for the IG export problem.
+End-to-end **FRAME → COMPARE → COMMIT → SHARPEN** for the IG export problem.
 
-| Step | Prompt | Output file |
-|------|--------|-------------|
-| 1 | [`1_design_output_problem_summary.md`](../project_toolkit/1_design_output_problem_summary.md) | `docs/problem_summary.md` |
-| 2 | [`2_design_output_solution_options.md`](../project_toolkit/2_design_output_solution_options.md) | `docs/solution_options.md` |
-| 2.5 | [`2.5_design_output_solution_coverage.md`](../project_toolkit/2.5_design_output_solution_coverage.md) | `docs/design_decisions.md` |
-| 3 | Chat refine | updates `design_decisions.md` |
+| Phase | Prompt | Output file |
+|-------|--------|-------------|
+| FRAME | [`01_frame_problem_summary.md`](../project_toolkit/01_frame_problem_summary.md) | `docs/problem_summary.md` |
+| COMPARE | [`02_compare_solution_options.md`](../project_toolkit/02_compare_solution_options.md) | `docs/solution_options.md` |
+| COMMIT | [`03_commit_solution_coverage.md`](../project_toolkit/03_commit_solution_coverage.md) | `docs/design_decisions.md` |
+| SHARPEN | Chat refine | updates `design_decisions.md` |
 
 ---
 
-## Step 0 — Setup
+## Setup
 
 ```bash
 mkdir -p docs/reports
 ```
 
-Pin prompts 1, 2, and 2.5.
+Pin `01_frame`, `02_compare`, and `03_commit`.
 
 ---
 
-## Step 1 — Problem Framing
+## FRAME — Problem Framing
 
-**Paste into Step 1 prompt:**
+**Paste into FRAME prompt:**
 
 ```text
 Here is an IG export of the chat. It will be used for LLMs for learning about my
@@ -34,13 +34,13 @@ format. It should be made as easy as possible for an LLM to use for these purpos
 Consider memory/token usage, ease of understanding, indexing.
 ```
 
-**Output:** `docs/problem_summary.md` — see Step 1 section in prior version for full FR/SC/PRI list. Answer Q-2 (your messages only for sentence gen) and Q-3 (chunked + index) before Step 2.
+**Output:** `docs/problem_summary.md` — see FRAME section in prior version for full FR/SC/PRI list. Answer Q-2 (your messages only for sentence gen) and Q-3 (chunked + index) before COMPARE.
 
 ---
 
-## Step 2 — Solution Options
+## COMPARE — Solution Options
 
-**Run Step 2 prompt** with `@docs/problem_summary.md`.
+**Run COMPARE prompt** with `@docs/problem_summary.md`.
 
 **Output:** `docs/solution_options.md` (abbreviated)
 
@@ -115,17 +115,17 @@ Consider memory/token usage, ease of understanding, indexing.
 
 ---
 
-## Step 2.5 — Solution Coverage Map
+## COMMIT — Solution Coverage Map
 
-**Run Step 2.5** with chosen approach (matches Step 2 option name).
+**Run COMMIT** with chosen approach (matches COMPARE option name).
 
 **Output:** `docs/design_decisions.md` — What We're Building, Coverage Map, Refinement Tasks (FR-7 manifest schema blocks implementation).
 
-*(Same as prior walkthrough Step 2.5 section.)*
+*(Same as prior walkthrough COMMIT section.)*
 
 ---
 
-## Step 3 — Refine
+## SHARPEN — Refine
 
 Refine FR-7 manifest schema → FR-7, SC-3 confidence → High.
 
@@ -134,16 +134,16 @@ Refine FR-7 manifest schema → FR-7, SC-3 confidence → High.
 ## Flow
 
 ```
-problem_summary.md  →  solution_options.md  →  [choose]  →  design_decisions.md  →  refine
+problem_summary.md  →  solution_options.md  →  [choose]  →  design_decisions.md  →  sharpen
      WHAT                  OPTIONS                         CHOSEN
 ```
 
 ## Cheat sheet
 
-| Step | Prompt | You provide |
-|------|--------|-------------|
-| 1 | `1_...` | Raw unstructured problem |
-| 2 | `2_...` | `@problem_summary.md` |
+| Phase | Prompt | You provide |
+|-------|--------|-------------|
+| FRAME | `01_frame_...` | Raw unstructured problem |
+| COMPARE | `02_compare_...` | `@problem_summary.md` |
 | — | — | Review matrix; pick approach |
-| 2.5 | `2.5_...` | Chosen approach name from Step 2 |
-| 3 | Chat | Refine Medium/Low from Coverage Map |
+| COMMIT | `03_commit_...` | Chosen approach name from COMPARE |
+| SHARPEN | Chat | Refine Medium/Low from Coverage Map |

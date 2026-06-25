@@ -38,8 +38,8 @@ your-project/
 ├── docs/
 │   ├── problem_summary.md      # Step 1 — WHAT & WHY (stable IDs)
 │   ├── solution_options.md     # Step 2 — OPTIONS (fit matrix, risks)
-│   ├── design_decisions.md     # Step 2.5 — CHOSEN (coverage map)
-│   ├── acceptance_criteria.md  # Phase 6 — AC-* traces to FR-*/NFR-*
+│   ├── design_decisions.md     # COMMIT — CHOSEN (coverage map)
+│   ├── acceptance_criteria.md  # DEFINE — AC-* traces to FR-*/NFR-*
 │   └── reports/                # Phase 3+ — auto-saved review outputs
 │       ├── security_2026_report.md
 │       ├── code_quality_report.md
@@ -73,7 +73,7 @@ Create `docs/reports/` and ensure your AI tool can read and write the project di
 
 **Goal:** Establish WHAT & WHY before any architecture or code.
 
-1. Write `docs/problem_summary.md` yourself, or use the **Problem Statement Expander** from [`project_toolkit/1_design_output_problem_summary.md`](project_toolkit/1_design_output_problem_summary.md).
+1. Write `docs/problem_summary.md` yourself, or use the **Problem Statement Expander** from [`project_toolkit/01_frame_problem_summary.md`](project_toolkit/01_frame_problem_summary.md).
 
    Output includes stable IDs (`PRI-*`, `SC-*`, `FR-*`, `NFR-*`, `CON-*`, `OOS-*`, `ASM-*`, `Q-*`):
    - Problem statement + success criteria
@@ -83,15 +83,15 @@ Create `docs/reports/` and ensure your AI tool can read and write the project di
 
    Answer any **Questions for Human** before proceeding. No solution content in this file.
 
-2. Run **Solution Options** from [`project_toolkit/2_design_output_solution_options.md`](project_toolkit/2_design_output_solution_options.md).
+2. Run **Solution Options** from [`project_toolkit/02_compare_solution_options.md`](project_toolkit/02_compare_solution_options.md).
 
    Generates `docs/solution_options.md`: Requirements Fit Matrix (every SC/FR/NFR × each approach), risks, trade-offs, future concerns. **Status: Exploring** — you choose.
 
-3. Run **Solution Coverage Map** from [`project_toolkit/2.5_design_output_solution_coverage.md`](project_toolkit/2.5_design_output_solution_coverage.md) after choosing.
+3. Run **Solution Coverage Map** from [`project_toolkit/03_commit_solution_coverage.md`](project_toolkit/03_commit_solution_coverage.md) after choosing.
 
    Generates `docs/design_decisions.md`: What We're Building + Coverage Map + Refinement Tasks.
 
-   **Formal mode (optional):** [`2_design_output_decisions_draft.md`](project_toolkit/2_design_output_decisions_draft.md) for bulk interview draft.
+   **Formal mode (optional):** [`02b_formal_decisions_bootstrap.md`](project_toolkit/02b_formal_decisions_bootstrap.md) for bulk interview draft.
 
 ---
 
@@ -99,7 +99,7 @@ Create `docs/reports/` and ensure your AI tool can read and write the project di
 
 **Goal:** Lock in HOW with explicit rationale and requirement traceability.
 
-Use **Decision Refiner** from [`project_toolkit/3_design_refine_single_decision.md`](project_toolkit/3_design_refine_single_decision.md). **Start with Core Architecture / Approach.**
+Use **Decision Refiner** from [`project_toolkit/04_sharpen_single_decision.md`](project_toolkit/04_sharpen_single_decision.md). **Start with Core Architecture / Approach.**
 
 1. Review the **Approach Fit Analysis** table — each concern rated Strong/Weak/Required/etc. per option
 2. Confirm the summary cites `PRI-*` as tie-breaker
@@ -130,8 +130,8 @@ With finalized (or mostly finalized) decisions:
 
 | Prompt | File | Output |
 |--------|------|--------|
-| Architecture & Diagram | [`project_toolkit/4_design_output_architecture_diagram.md`](project_toolkit/4_design_output_architecture_diagram.md) | Mermaid flowchart + approach evaluation |
-| Gap Analysis | [`project_toolkit/5_design_output_gap_analysis.md`](project_toolkit/5_design_output_gap_analysis.md) | Prioritized gaps in design |
+| Architecture & Diagram | [`project_toolkit/05_diagram_architecture.md`](project_toolkit/05_diagram_architecture.md) | Mermaid flowchart + approach evaluation |
+| Gap Analysis | [`project_toolkit/06_analyze_gaps.md`](project_toolkit/06_analyze_gaps.md) | Prioritized gaps in design |
 | 2026 Security Review | [`reports/project_output_security_audit.md`](reports/project_output_security_audit.md) | → `docs/reports/security_2026_report.md` |
 
 Run additional reviews as time allows:
@@ -191,20 +191,21 @@ Do not introduce patterns we explicitly rejected in design decisions.
 
 ## Prompt Reference
 
-Prompt files follow `{scope}_{action}_{deliverable}.md`. The ordered workflow uses a `{n}_` prefix (`1_`–`5_`).
+Prompt files follow `{phase}_{verb}_{artifact}.md` (e.g. `01_frame_problem_summary.md`). Formal bootstrap uses `02b_` prefix.
 
 ### Workflow (ordered)
 
-| Step | Purpose | File | Output |
+| Phase | Purpose | File | Output |
 |------|---------|------|--------|
-| 1 | Problem statement expander | [`project_toolkit/1_design_output_problem_summary.md`](project_toolkit/1_design_output_problem_summary.md) | `docs/problem_summary.md` |
-| 2 | **Solution options** | [`project_toolkit/2_design_output_solution_options.md`](project_toolkit/2_design_output_solution_options.md) | `docs/solution_options.md` |
-| 2.5 | Solution coverage map | [`project_toolkit/2.5_design_output_solution_coverage.md`](project_toolkit/2.5_design_output_solution_coverage.md) | `docs/design_decisions.md` |
-| 2b | Decisions bootstrap (formal only) | [`project_toolkit/2_design_output_decisions_draft.md`](project_toolkit/2_design_output_decisions_draft.md) | bulk `design_decisions.md` draft |
-| 3 | Iterative decision refiner (formal) | [`project_toolkit/3_design_refine_single_decision.md`](project_toolkit/3_design_refine_single_decision.md) | updates `docs/design_decisions.md` |
-| 4 | Architecture & Mermaid diagram | [`project_toolkit/4_design_output_architecture_diagram.md`](project_toolkit/4_design_output_architecture_diagram.md) | Mermaid + evaluation |
-| 5 | Gap analysis | [`project_toolkit/5_design_output_gap_analysis.md`](project_toolkit/5_design_output_gap_analysis.md) | prioritized design gaps |
-| 6 | Acceptance criteria | [`project_toolkit/6_acceptance_criteria_simple.md`](project_toolkit/6_acceptance_criteria_simple.md) | `docs/acceptance_criteria.md` |
+| FRAME | Problem statement expander | [`project_toolkit/01_frame_problem_summary.md`](project_toolkit/01_frame_problem_summary.md) | `docs/problem_summary.md` |
+| COMPARE | **Solution options** | [`project_toolkit/02_compare_solution_options.md`](project_toolkit/02_compare_solution_options.md) | `docs/solution_options.md` |
+| COMMIT | Solution coverage map | [`project_toolkit/03_commit_solution_coverage.md`](project_toolkit/03_commit_solution_coverage.md) | `docs/design_decisions.md` |
+| Formal bootstrap | Decisions bootstrap (formal only) | [`project_toolkit/02b_formal_decisions_bootstrap.md`](project_toolkit/02b_formal_decisions_bootstrap.md) | bulk `design_decisions.md` draft |
+| SHARPEN | Iterative decision refiner (formal) | [`project_toolkit/04_sharpen_single_decision.md`](project_toolkit/04_sharpen_single_decision.md) | updates `docs/design_decisions.md` |
+| DIAGRAM | Architecture & Mermaid diagram | [`project_toolkit/05_diagram_architecture.md`](project_toolkit/05_diagram_architecture.md) | Mermaid + evaluation |
+| ANALYZE | Gap analysis | [`project_toolkit/06_analyze_gaps.md`](project_toolkit/06_analyze_gaps.md) | prioritized design gaps |
+| DEFINE | Acceptance criteria | [`project_toolkit/07_define_acceptance_criteria.md`](project_toolkit/07_define_acceptance_criteria.md) | `docs/acceptance_criteria.md` |
+| VERIFY | Acceptance verification | [`project_toolkit/08_verify_acceptance.md`](project_toolkit/08_verify_acceptance.md) | `docs/reports/acceptance_criteria_verification.md` |
 
 ### Traceability
 
@@ -213,8 +214,8 @@ Requirement IDs live in `docs/problem_summary.md`. The **Requirement Traceabilit
 | ID prefix | Document | Purpose |
 |-----------|----------|---------|
 | `PRI-*`, `FR-*`, `NFR-*`, `SC-*`, … | problem_summary | WHAT — frozen after Step 1 |
-| Fit + Confidence per option | **solution_options** | OPTIONS — before choosing |
-| Coverage Map | design_decisions | CHOSEN — confidence after Step 2.5 |
+| Fit + Confidence per option | **solution_options** | COMPARE — before choosing |
+| Coverage Map | design_decisions | COMMIT — confidence after COMMIT |
 | `AC-*` | acceptance_criteria | Verification → `FR-*` / `NFR-*` |
 
 See [HOW_TO_USE.md](HOW_TO_USE.md) and [examples/walkthrough_ig_corpus.md](examples/walkthrough_ig_corpus.md).
@@ -230,7 +231,7 @@ See [HOW_TO_USE.md](HOW_TO_USE.md) and [examples/walkthrough_ig_corpus.md](examp
 | Testing pyramid | [`reports/project_output_testing_pyramid.md`](reports/project_output_testing_pyramid.md) | `docs/reports/testing_pyramid_analysis.md` |
 | Performance & optimal metrics | [`reports/project_output_optimal_metrics.md`](reports/project_output_optimal_metrics.md) | `docs/reports/performance_metrics_report.md` |
 | Observability metrics | [`reports/project_output_observability_metrics.md`](reports/project_output_observability_metrics.md) | `docs/reports/metrics_recommendations.md` |
-| Acceptance verification | [`reports/project_output_acceptance_verification.md`](reports/project_output_acceptance_verification.md) | `docs/reports/acceptance_criteria_verification.md` |
+| Acceptance verification | [`project_toolkit/08_verify_acceptance.md`](project_toolkit/08_verify_acceptance.md) | `docs/reports/acceptance_criteria_verification.md` |
 | Integration architecture | [`reports/project_output_integration_architecture.md`](reports/project_output_integration_architecture.md) | `docs/reports/integration_architecture.md` |
 | PR description | [`reports/project_output_pr_notes.md`](reports/project_output_pr_notes.md) | `docs/pr_notes.md` |
 
@@ -297,7 +298,7 @@ If implementation diverges from design decisions, re-run the relevant review pro
 [ ] mkdir -p docs/reports
 [ ] docs/problem_summary.md — IDs assigned, open questions answered
 [ ] docs/solution_options.md — Fit Matrix, Status still Exploring until you choose
-[ ] docs/design_decisions.md — Coverage Map after Step 2.5
+[ ] docs/design_decisions.md — Coverage Map after COMMIT
 [ ] Core Architecture: Human Reviewed + Solution Overview written
 [ ] Each decision: cites FR-*/PRI-*, Status Human Reviewed
 [ ] Mermaid architecture diagram generated

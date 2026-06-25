@@ -1,8 +1,8 @@
-# 3 — Design Refine: Single Decision
+# SHARPEN — Single Decision
 
-Ordered workflow step 3. Prompt file: `3_design_refine_single_decision.md`
+Phase 04 · verb: sharpen · artifact: single_decision · Prompt: `04_sharpen_single_decision.md`
 
-See [HOW_TO_USE.md](../HOW_TO_USE.md). After choosing an approach, run Step 2.5 (`2.5_design_output_solution_coverage.md`) before this prompt unless Coverage Map already exists.
+See [HOW_TO_USE.md](../HOW_TO_USE.md). After choosing an approach, run COMMIT (`03_commit_solution_coverage.md`) before this prompt unless Coverage Map already exists.
 
 ---
 

@@ -1,6 +1,6 @@
-# 1 — Design Output: Problem Summary
+# FRAME — Problem Summary
 
-Ordered workflow step 1. Prompt file: `1_design_output_problem_summary.md`
+Phase 01 · verb: frame · artifact: problem_summary · Prompt: `01_frame_problem_summary.md`
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) for the full workflow guide.
 
@@ -8,15 +8,14 @@ See [HOW_TO_USE.md](../HOW_TO_USE.md) for the full workflow guide.
 
 ## Workflow Checklist
 
-1. Create `docs/problem_summary.md`
-2. Create `docs/solution_options.md` — prompt 2 (Requirements Fit Matrix)
-3. Choose approach → run prompt 2.5 → `docs/design_decisions.md`
-4. Refine gaps (chat or prompt 3)
-5. Architecture + Diagram (optional)
-6. Gap Analysis / reports (optional)
-7. Acceptance criteria (optional, post-solution shape)
-8. Implementation (small chunks)
-9. Review + Testing
+1. FRAME → `docs/problem_summary.md` — this prompt
+2. COMPARE → `docs/solution_options.md` — `02_compare_solution_options.md`
+3. You choose → COMMIT → `docs/design_decisions.md` — `03_commit_solution_coverage.md`
+4. SHARPEN gaps (chat or `04_sharpen_single_decision.md`) — optional
+5. BUILD — implement Coverage Map (small chunks)
+6. DEFINE AC → `docs/acceptance_criteria.md` — `07_define_acceptance_criteria.md`
+7. VERIFY — `08_verify_acceptance.md` → `docs/reports/acceptance_criteria_verification.md`
+8. Formal extras: `05_diagram_architecture.md`, `06_analyze_gaps.md`, review reports
 
 ---
 

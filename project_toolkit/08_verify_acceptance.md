@@ -1,11 +1,15 @@
-**Moved to:** [`project_toolkit/08_verify_acceptance.md`](../project_toolkit/08_verify_acceptance.md)
+# VERIFY — Acceptance Criteria
 
-Use that prompt for the VERIFY phase. Content below kept for backward compatibility.
+Phase 08 · verb: verify · artifact: acceptance_verification · Prompt: `08_verify_acceptance.md`
+
+Run **after BUILD** — once code exists to inspect. Requires `docs/acceptance_criteria.md` from DEFINE (`07_define_acceptance_criteria.md`).
+
+See [HOW_TO_USE.md](../HOW_TO_USE.md) for the FCCBV cheat sheet.
 
 ---
 
 **CONFIGURATION:**
-- Primary Language: [Kotlin / Python / TypeScript / Other]
+- Primary Language: [Go / Kotlin / Python / TypeScript / Other]
 
 You are a rigorous technical reviewer.
 

@@ -6,20 +6,65 @@ Human-led, AI-assisted workflow for framing problems, comparing solution options
 
 ---
 
-## Core Flow
+## Core Flow — FCCBV
+
+Five verbs, five artifacts. Mnemonic: **Frame → Compare → Commit → Build → Verify**.
 
 ```
-Step 1  →  problem_summary.md      WHAT (requirements + IDs)
-Step 2  →  solution_options.md     OPTIONS (fit matrix, risks, trade-offs)
-         →  you choose
-Step 2.5 →  design_decisions.md    CHOSEN (coverage map + confidence)
-Step 3  →  refine gaps             dig deeper on Medium/Low rows
+FRAME    →  problem_summary.md       WHAT (requirements + IDs)
+COMPARE  →  solution_options.md      OPTIONS (fit matrix, risks, trade-offs)
+           →  you choose
+COMMIT   →  design_decisions.md      CHOSEN (coverage map + confidence)
+BUILD    →  code                     implement Coverage Map
+DEFINE   →  acceptance_criteria.md   testable AC-* (before or after BUILD)
+VERIFY   →  reports/…                code vs AC-* after BUILD
 ```
 
-| Mode | Steps |
-|------|-------|
-| **Default** | 1 → 2 → choose → 2.5 → 3 → implement |
-| **Formal** (interviews) | 1 → 2 → 2.5 → 3 refiner prompts → 4–8 reports |
+| Mode | Phases |
+|------|--------|
+| **Default** (coding tasks) | FRAME → COMPARE → choose → COMMIT → BUILD → DEFINE → VERIFY |
+| **Formal** (interviews) | above + SHARPEN + diagram/gap/review reports |
+
+Optional between COMMIT and BUILD: **SHARPEN** — refine Medium/Low Coverage Map rows (chat or `04_sharpen_single_decision.md`).
+
+---
+
+## Cheat Sheet
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│  FCCBV — pin these prompts                                               │
+├──────────┬─────────────────────────────────────┬─────────────────────────┤
+│  Phase   │  Prompt                             │  Output                 │
+├──────────┼─────────────────────────────────────┼─────────────────────────┤
+│  FRAME   │  01_frame_problem_summary.md        │  problem_summary.md     │
+│  COMPARE │  02_compare_solution_options.md     │  solution_options.md    │
+│  ★ YOU   │  pick one option vs PRI-*           │  —                      │
+│  COMMIT  │  03_commit_solution_coverage.md     │  design_decisions.md    │
+│  BUILD   │  implement Coverage Map             │  src/                   │
+│  DEFINE  │  07_define_acceptance_criteria.md   │  acceptance_criteria.md │
+│  VERIFY  │  08_verify_acceptance.md            │  reports/…verification  │
+├──────────┴─────────────────────────────────────┴─────────────────────────┤
+│  Skip unless blocked: 04_sharpen, 05_diagram, 06_analyze_gaps, reviews   │
+│  Formal only: 02b_formal_decisions_bootstrap.md                          │
+│  ID priority: PRI-* > FR-*/NFR-*/SC-* > AC-*                             │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+### Go / coding task (15–25 min)
+
+```bash
+mkdir -p docs/reports
+```
+
+1. **FRAME** — paste task + notes → `problem_summary.md` (no solution language)
+2. **COMPARE** — `@problem_summary.md` → read Fit Matrix → **you choose**
+3. **COMMIT** — paste chosen approach name → `design_decisions.md` Coverage Map
+4. **BUILD** — *"Implement per design_decisions.md Coverage Map; trace FR-*/NFR-*"*
+5. **DEFINE** — Given/When/Then criteria tracing to FR/NFR
+6. **VERIFY** — scan codebase vs every AC-*
+
+Skip SHARPEN unless a Low-confidence row blocks implementation.
 
 ---
 
@@ -30,49 +75,63 @@ mkdir -p docs/reports
 ```
 
 **Pin these prompts:**
-- `project_toolkit/1_design_output_problem_summary.md`
-- `project_toolkit/2_design_output_solution_options.md`
-- `project_toolkit/2.5_design_output_solution_coverage.md`
+- `project_toolkit/01_frame_problem_summary.md`
+- `project_toolkit/02_compare_solution_options.md`
+- `project_toolkit/03_commit_solution_coverage.md`
+- `project_toolkit/07_define_acceptance_criteria.md`
+- `project_toolkit/08_verify_acceptance.md`
 
 ---
 
 ## Document Model
 
-| Document | Step | Role |
-|----------|------|------|
-| `docs/problem_summary.md` | 1 | WHAT — requirements, no solution |
-| `docs/solution_options.md` | 2 | OPTIONS — compare approaches before choosing |
-| `docs/design_decisions.md` | 2.5+ | CHOSEN — commitment + per-requirement confidence |
+| Document | Phase | Role |
+|----------|-------|------|
+| `docs/problem_summary.md` | FRAME | WHAT — requirements, no solution |
+| `docs/solution_options.md` | COMPARE | OPTIONS — compare approaches before choosing |
+| `docs/design_decisions.md` | COMMIT+ | CHOSEN — commitment + per-requirement confidence |
+| `docs/acceptance_criteria.md` | DEFINE | AC-* — testable criteria tracing to FR/NFR |
 
 ```mermaid
 flowchart TD
-  S1[Step1 problem_summary]
-  S2[Step2 solution_options]
+  F[FRAME problem_summary]
+  C[COMPARE solution_options]
   Pick[You choose]
-  S25[Step2.5 design_decisions]
-  S3[Step3 refine]
-  Impl[Implement]
+  Co[COMMIT design_decisions]
+  B[BUILD code]
+  D[DEFINE acceptance_criteria]
+  V[VERIFY report]
 
-  S1 --> S2
-  S2 --> Pick
-  Pick --> S25
-  S25 --> S3
-  S3 --> Impl
+  F --> C
+  C --> Pick
+  Pick --> Co
+  Co --> B
+  Co --> D
+  B --> V
+  D --> V
 ```
 
 ---
 
-## Step 0 — Setup
+## Prompt Reference
 
-```bash
-mkdir -p docs/reports
-```
+| Phase | Prompt | Output |
+|-------|--------|--------|
+| FRAME | [`01_frame_problem_summary.md`](project_toolkit/01_frame_problem_summary.md) | `docs/problem_summary.md` |
+| COMPARE | [`02_compare_solution_options.md`](project_toolkit/02_compare_solution_options.md) | `docs/solution_options.md` |
+| COMMIT | [`03_commit_solution_coverage.md`](project_toolkit/03_commit_solution_coverage.md) | `docs/design_decisions.md` |
+| SHARPEN | [`04_sharpen_single_decision.md`](project_toolkit/04_sharpen_single_decision.md) | updates `design_decisions.md` |
+| DIAGRAM | [`05_diagram_architecture.md`](project_toolkit/05_diagram_architecture.md) | Mermaid diagram |
+| ANALYZE | [`06_analyze_gaps.md`](project_toolkit/06_analyze_gaps.md) | prioritized gaps |
+| DEFINE | [`07_define_acceptance_criteria.md`](project_toolkit/07_define_acceptance_criteria.md) | `docs/acceptance_criteria.md` |
+| VERIFY | [`08_verify_acceptance.md`](project_toolkit/08_verify_acceptance.md) | `docs/reports/acceptance_criteria_verification.md` |
+| Formal bootstrap | [`02b_formal_decisions_bootstrap.md`](project_toolkit/02b_formal_decisions_bootstrap.md) | bulk `design_decisions.md` draft |
 
 ---
 
-## Step 1 — Problem Framing
+## FRAME — Problem Framing
 
-**Prompt:** [`1_design_output_problem_summary.md`](project_toolkit/1_design_output_problem_summary.md)
+**Prompt:** [`01_frame_problem_summary.md`](project_toolkit/01_frame_problem_summary.md)
 
 **Output:** `docs/problem_summary.md` — IDs, Considerations Coverage, open questions.
 
@@ -80,9 +139,9 @@ mkdir -p docs/reports
 
 ---
 
-## Step 2 — Solution Options
+## COMPARE — Solution Options
 
-**Prompt:** [`2_design_output_solution_options.md`](project_toolkit/2_design_output_solution_options.md)
+**Prompt:** [`02_compare_solution_options.md`](project_toolkit/02_compare_solution_options.md)
 
 **Input:** `docs/problem_summary.md`
 
@@ -104,9 +163,9 @@ mkdir -p docs/reports
 
 ---
 
-## Step 2.5 — Solution Coverage Map
+## COMMIT — Solution Coverage Map
 
-**Prompt:** [`2.5_design_output_solution_coverage.md`](project_toolkit/2.5_design_output_solution_coverage.md)
+**Prompt:** [`03_commit_solution_coverage.md`](project_toolkit/03_commit_solution_coverage.md)
 
 **Input:** `problem_summary.md` + `solution_options.md` + your chosen approach
 
@@ -116,21 +175,43 @@ Answers: *"Given what we picked, how confident are we on every requirement?"*
 
 ---
 
-## Step 3 — Refine
+## SHARPEN — Refine (optional)
 
 @ `problem_summary.md`, `solution_options.md`, `design_decisions.md` — refine Medium/Low rows from Refinement Tasks.
 
-Formal optional: [`3_design_refine_single_decision.md`](project_toolkit/3_design_refine_single_decision.md)
+Formal optional: [`04_sharpen_single_decision.md`](project_toolkit/04_sharpen_single_decision.md)
 
 ---
 
-## Implementation
+## BUILD — Implementation
 
 ```markdown
 Implement [module] per docs/design_decisions.md Coverage Map.
 Trace to FR-* / NFR-* from problem_summary.md.
 Respect PRI-* ordering. Clear blocking Refinement Tasks first.
 ```
+
+---
+
+## DEFINE — Acceptance Criteria
+
+**Prompt:** [`07_define_acceptance_criteria.md`](project_toolkit/07_define_acceptance_criteria.md)
+
+**Output:** `docs/acceptance_criteria.md` — AC-* with Given/When/Then, tracing to FR/NFR.
+
+Run after COMMIT. Can run before BUILD (clarity) or after BUILD (as-built criteria).
+
+---
+
+## VERIFY — Post-Implementation Check
+
+**Prompt:** [`08_verify_acceptance.md`](project_toolkit/08_verify_acceptance.md)
+
+**Input:** `problem_summary.md`, `design_decisions.md`, `acceptance_criteria.md`, codebase
+
+**Output:** `docs/reports/acceptance_criteria_verification.md`
+
+Always run after BUILD.
 
 ---
 
@@ -143,25 +224,29 @@ Respect PRI-* ordering. Clear blocking Refinement Tasks first.
 | Risks / trade-offs / future concerns per option? | `solution_options.md` §3 |
 | What did we choose? | `design_decisions.md` |
 | Confidence for chosen approach? | `design_decisions.md` Coverage Map |
+| How do we test it? | `acceptance_criteria.md` AC-* |
+| Does the code pass? | `reports/acceptance_criteria_verification.md` |
 
 ---
 
 ## Checklist
 
 ```
-[ ] Step 1: problem_summary.md
-[ ] Step 2: solution_options.md — Fit Matrix complete, recommendation still Exploring
+[ ] FRAME: problem_summary.md
+[ ] COMPARE: solution_options.md — Fit Matrix complete, Status still Exploring
 [ ] You chose an approach (cite PRI-*)
-[ ] Step 2.5: design_decisions.md — Coverage Map
-[ ] Step 3: blocking Refinement Tasks cleared
-[ ] Implement
-[ ] Optional: reports/
+[ ] COMMIT: design_decisions.md — Coverage Map
+[ ] SHARPEN: blocking Refinement Tasks cleared (if any)
+[ ] BUILD: implement
+[ ] DEFINE: acceptance_criteria.md
+[ ] VERIFY: acceptance_criteria_verification.md
+[ ] Optional: diagram, gaps, review reports/
 ```
 
 ---
 
 ## Philosophy
 
-- **Problem → Options → Choice → Confidence → Refine**
-- Step 2 persists options; don't leave them in chat-only
-- Step 2.5 commits; Step 2 explores
+- **Frame → Compare → Commit → Build → Verify**
+- COMPARE persists options; don't leave them in chat-only
+- COMPARE explores; COMMIT commits

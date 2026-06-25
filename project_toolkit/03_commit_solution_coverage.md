@@ -1,9 +1,9 @@
-# 2.5 — Design Output: Solution Coverage Map
+# COMMIT — Solution Coverage Map
 
-Ordered workflow step 2.5. Prompt file: `2.5_design_output_solution_coverage.md`
+Phase 03 · verb: commit · artifact: solution_coverage · Prompt: `03_commit_solution_coverage.md`
 
-Run **after you have chosen an approach** from Step 2 (`docs/solution_options.md`).
-Run **before** deep refinement or implementation.
+Run **after you have chosen an approach** from COMPARE (`docs/solution_options.md`).
+Run **before** SHARPEN, BUILD, or formal review prompts.
 
 See [HOW_TO_USE.md](../HOW_TO_USE.md) for Conversation mode and the worked example.
 
@@ -13,7 +13,7 @@ You are a senior technical architect.
 
 **Context:**
 - docs/problem_summary.md (requirement IDs: PRI-*, SC-*, FR-*, NFR-*, etc.)
-- docs/solution_options.md (Requirements Fit Matrix and option assessments from Step 2)
+- docs/solution_options.md (Requirements Fit Matrix and option assessments from COMPARE)
 - Chosen approach (below)
 
 **Chosen approach:**
@@ -41,7 +41,7 @@ Create or update `docs/design_decisions.md` with these sections (preserve other 
 **Status:** Human Reviewed
 **Addresses:** [FR-*, NFR-*, SC-* list]
 **Aligned priorities:** [PRI-* list]
-**Rationale:** [Why this won — cite Step 2 Fit Matrix and PRI-* tie-breaker vs other options in solution_options.md]
+**Rationale:** [Why this won — cite COMPARE Fit Matrix and PRI-* tie-breaker vs other options in solution_options.md]
 
 ## Solution Coverage Map
 

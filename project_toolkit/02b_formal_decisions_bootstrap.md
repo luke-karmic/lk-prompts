@@ -1,8 +1,8 @@
-# 2 — Design Output: Decisions Bootstrap (Formal Mode)
+# Formal Bootstrap — Decisions Draft
 
-Ordered workflow step 2 — **formal mode only**. Prompt file: `2_design_output_decisions_draft.md`
+Phase 02b · **formal mode only** · Prompt: `02b_formal_decisions_bootstrap.md`
 
-**Default path:** use [`2_design_output_solution_options.md`](2_design_output_solution_options.md) instead.
+**Default path:** use [`02_compare_solution_options.md`](02_compare_solution_options.md) instead.
 That prompt writes `docs/solution_options.md` with the Requirements Fit Matrix and option assessments.
 
 Use this file only when you want a **single bulk draft** of `docs/design_decisions.md` including
@@ -17,7 +17,7 @@ You are a senior software architect.
 **Full Problem Context:**
 [PASTE ENTIRE docs/problem_summary.md CONTENT]
 
-**Prefer the standard Step 2 flow:** Run `2_design_output_solution_options.md` first, then Step 2.5 after choosing.
+**Prefer the standard COMPARE flow:** Run `02_compare_solution_options.md` first, then COMMIT after choosing.
 
 If continuing with formal bootstrap, create `docs/design_decisions.md` with this structure:
 
@@ -29,7 +29,7 @@ If continuing with formal bootstrap, create `docs/design_decisions.md` with this
 
 ## Solution Overview
 
-_[Placeholder — fill at Step 2.5 once approach is chosen]_
+_[Placeholder — fill at COMMIT once approach is chosen]_
 
 ## Approach Fit Analysis — Core Architecture
 
@@ -59,8 +59,8 @@ Initialize all SC/FR/NFR as `Pending`.
 
 ## Recorded Decisions
 
-Draft format only — all `Status: Draft`. See `3_design_refine_single_decision.md`.
+Draft format only — all `Status: Draft`. See `04_sharpen_single_decision.md`.
 
 ---
 
-**Rules:** Do not mark anything Human Reviewed. Cite requirement IDs. After human chooses, run Step 2.5.
+**Rules:** Do not mark anything Human Reviewed. Cite requirement IDs. After human chooses, run COMMIT.
